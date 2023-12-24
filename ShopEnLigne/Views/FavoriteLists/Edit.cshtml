@@ -1,0 +1,155 @@
+﻿@model ShopEnLigne.Models.FavoriteList
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/StyleDashboard.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ShopEnLigne.styles.css" asp-append-version="true" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>ECommerce-ShoppingCart | Korsat X Parmaga</title>
+
+    <!-- BOX ICONS -->
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <div class="container">
+        <div class="menu-dashboard">
+            <!-- TOP MENU -->
+            <div class="top-menu">
+                <div class="toggle">
+                    <i class='bx bx-menu'></i>
+                </div>
+            </div>
+            <!-- MENU -->
+            <br />
+            <br />
+            <br />
+            <div class="menu">
+                <div class="enlace">
+                    <i class="bx bx-grid-alt"></i>
+                    <a asp-action="Index"><span>Dashboard</span></a>
+                </div>
+
+                <div class="enlace">
+                    <i class="bx bx-time"></i>
+                    <a asp-action="Index" asp-controller="Historiques"><span>History</span></a>
+                </div>
+
+                <div class="enlace">
+                    <i class="bx bx-file-blank"></i>
+                    <a asp-action="Index" asp-controller="BlackLists"><span>BlackList</span></a>
+                </div>
+
+                <div class="enlace">
+                    <i class="bx bx-heart"></i>
+                    <a asp-action="Index" asp-controller="FavoriteLists"><span>FavList</span></a>
+                </div>
+            </div>
+        </div>
+        <div class="bodycontent">
+
+            <div class="row">
+                <div class="col-md-4">
+                    <form asp-action="Edit">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="Id" />
+                        <div class="form-group">
+                            <label asp-for="UserId" class="control-label"></label>
+                            <select asp-for="UserId" class="form-control" asp-items="ViewBag.UserId"></select>
+                            <span asp-validation-for="UserId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Save" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div>
+                <a asp-action="Index">Back to List</a>
+            </div>
+
+            @section Scripts {
+                @{
+                    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+                }
+            }
+            <style>
+                .bodycontent {
+                    background-color: #F0F0F0;
+                    border-radius: 8px;
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                    padding: 20px;
+                    width: 100%;
+                    max-width: 600px;
+                    display:flex;
+                    justify-content:center;
+                    justify-items:center;
+                    color:slategrey;
+                    margin-left:450px;
+                    margin-top:50px;
+                    max-height:200px;
+                }
+
+                /* Add more styling as needed for your form elements, buttons, etc. */
+                .form-group {
+                    margin-bottom: 20px;
+                    width:150px;
+                }
+
+                .btn-primary {
+                    background-color: #3498db;
+                    color:lightsteelblue;
+                    border: none;
+                    padding: 10px 20px;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    font-size: 16px;
+                }
+                .btn-primary:hover{
+                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+                }
+                .form-control{
+                    width:100px;
+                }
+                a{
+                    text-decoration:none;
+                    color:#000;
+                }
+            </style>
+
+        </div>
+    </div>
+    <script>
+        const toggle = document.querySelector(".toggle")
+        const menuDashboard = document.querySelector(".menu-dashboard")
+        const iconoMenu = toggle.querySelector("i")
+        const enlacesMenu = document.querySelectorAll(".enlace")
+
+        toggle.addEventListener("click", () => {
+            menuDashboard.classList.toggle("open")
+
+            if (iconoMenu.classList.contains("bx-menu")) {
+                iconoMenu.classList.replace("bx-menu", "bx-x")
+            } else {
+                iconoMenu.classList.replace("bx-x", "bx-menu")
+            }
+        })
+
+        enlacesMenu.forEach(enlace => {
+            enlace.addEventListener("click", () => {
+                menuDashboard.classList.add("open")
+                iconoMenu.classList.replace("bx-menu", "bx-x")
+            })
+        })
+    </script>
+</body>
+</html>
